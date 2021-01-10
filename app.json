@@ -1,0 +1,12 @@
+{
+  "name": "Beach_Me",
+  "displayName": "Beach_Me",
+  "expo": {
+    "name": "Beach_Me",
+    "slug": "Beach_Me",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
