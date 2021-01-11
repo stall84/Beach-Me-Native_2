@@ -1,8 +1,9 @@
 /*****  BASE IMPORTS  *****/
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
+import ReduxThunk from 'redux-thunk';
 /*************************************/
 
 /*****  EXPO COMPONENTS *****/
@@ -18,8 +19,11 @@ const rootReducer = combineReducers({
   reducer: appReducer,
 })
 const store = createStore(rootReducer, 
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  );
+  compose(
+    applyMiddleware(ReduxThunk),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+    )
+);
 /*************************************/
 
 /*****  APP COMPONENTS  *****/

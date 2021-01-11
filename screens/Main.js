@@ -15,7 +15,7 @@ const BeachRender = props => {
     return searchBeach.map(beach => {
     return (
         
-        <View style={styles.screen}>
+        <View>
             <Text style={styles.display}>
                 {beach}
             </Text>
