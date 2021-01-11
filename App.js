@@ -1,23 +1,31 @@
+/*****  BASE IMPORTS  *****/
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
+/*************************************/
 
-/****  EXPO COMPONENTS ****/
+/*****  EXPO COMPONENTS *****/
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
+/*************************************/
 
-/****  REDUX COMPONENTS/CONFIG  ****/
-import beachReducer from './store/reducers/beachReducer';
-import { loadAsync } from 'expo-font';
+/*****  REDUX COMPONENTS/CONFIG  *****/
+import appReducer from './store/reducers/appReducers';
+
 
 const rootReducer = combineReducers({
-  beach: beachReducer,
+  reducer: appReducer,
 })
-const store = createStore(rootReducer);
-/************************************/
+const store = createStore(rootReducer, 
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  );
+/*************************************/
 
+/*****  APP COMPONENTS  *****/
 import LoadingScreen from './screens/LoadingScreen';
+import Main from './screens/Main';
+/*************************************/
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -53,25 +61,17 @@ const App = () => {
   }, []);
 
 
-  return isAppLoaded ? (
-    <View style={styles.container}>
-      <Text style={styles.title}>BEACH-ME!!</Text>
-    </View>
-  ) : <LoadingScreen />;
+  return isAppLoaded ? ( 
+    <Provider store={store}>
+        <Main />
+    </Provider> 
+    ) : <LoadingScreen />
+    
 
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontFamily: 'Rubik-Mono',
-    fontSize: 35,
-  }
+  
 });
 
 export default App;
