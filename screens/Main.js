@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native'
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,23 +7,7 @@ import { addCords, addSearchBeaches } from '../store/actions/appActions';
 
 
 
-// BeacRender component for testing purposes with Redux state
-const BeachRender = props => {
 
-    const searchBeach = useSelector(state => state.reducer.searchBeaches)
-
-    return searchBeach.map(beach => {
-    return (
-        
-        <View>
-            <Text style={styles.display}>
-                {beach}
-            </Text>
-        </View>
-    )
-        })
-    
-}
 
 const Main = props => {
 
@@ -33,6 +17,11 @@ const Main = props => {
     const lng = useSelector(state => state.reducer.longitude);
     // const searchBeach = useSelector(state => state.reducer.searchBeaches)
 
+    useEffect(() => {
+    if (lat & lng) {
+        dispatch(addSearchBeaches(lat, lng))
+    }
+    }, [lat, lng])
     
     return (
         <View style={styles.screen}>
@@ -41,7 +30,7 @@ const Main = props => {
                 <Button title="Add Cords" 
                         onPress={() => {
                             dispatch(
-                                addCords(33.555, -88.323)
+                                addCords(33.5555, -88.3253)
                             )}
                             }/>
                 <Text style={styles.display}>
@@ -49,13 +38,9 @@ const Main = props => {
                 </Text>
             </View>
             <View>
-                <Button title="Add SearchBeaches" 
-                        onPress={() => {
-                            dispatch(
-                                addSearchBeaches(['Tybee Island', 'Fernandina Beach'])
-                            )}   
-                            }/>
-                <BeachRender />
+                {/* <Button title="Add SearchBeaches" 
+                        onPress={() => {dispatch(addSearchBeaches)}} /> */}
+
             </View>
         </View>
     )
