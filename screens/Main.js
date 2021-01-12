@@ -1,9 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native'
 
-import { useSelector, useDispatch } from 'react-redux';
+/*****  Custom Components  *****/
 
+
+/*****  React-Redux and Application Redux Dependencies *****/
+import { useSelector, useDispatch } from 'react-redux';
 import { addCords, addSearchBeaches } from '../store/actions/appActions';
+
 
 
 
@@ -11,12 +15,14 @@ import { addCords, addSearchBeaches } from '../store/actions/appActions';
 
 const Main = props => {
 
+    /*****  State Hooks  *****/
+    const [appReset, setAppReset] = useState(false);
+    /*****  Redux Hooks  *****/
     const dispatch = useDispatch();
-
     const lat = useSelector(state => state.reducer.latitude);
     const lng = useSelector(state => state.reducer.longitude);
-    // const searchBeach = useSelector(state => state.reducer.searchBeaches)
-
+    
+    // If Users position is available, send the location data to API for nearest beaches (large list)
     useEffect(() => {
     if (lat & lng) {
         dispatch(addSearchBeaches(lat, lng))
@@ -31,15 +37,15 @@ const Main = props => {
                         onPress={() => {
                             dispatch(
                                 addCords(33.5555, -88.3253)
-                            )}
+                            )
+                            props.onDisplayBeaches()}
                             }/>
                 <Text style={styles.display}>
                     Lat: {lat}, Lng: {lng}
                 </Text>
             </View>
             <View>
-                {/* <Button title="Add SearchBeaches" 
-                        onPress={() => {dispatch(addSearchBeaches)}} /> */}
+                
 
             </View>
         </View>

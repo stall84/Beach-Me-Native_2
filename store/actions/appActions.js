@@ -25,7 +25,7 @@ export const addSearchBeaches = (lat, lng) => {
     
     
     return async dispatch => {
-       const response = await fetch('http://localhost:5005/api/v1/beaches', {
+       const response = await fetch('http://192.168.1.220:5005/api/v1/beaches', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

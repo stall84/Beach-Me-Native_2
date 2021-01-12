@@ -5,7 +5,7 @@ import { ADD_CORDS,
 const initialState = {
     latitude: 0,
     longitude: 0,
-    searchBeaches: ['TestBeach'],
+    searchBeaches: null,
     beaches: null,
     forecasts: null,
     day: null
