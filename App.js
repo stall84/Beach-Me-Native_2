@@ -29,6 +29,7 @@ const store = createStore(rootReducer,
 /*****  APP COMPONENTS  *****/
 import LoadingScreen from './screens/LoadingScreen';
 import Main from './screens/Main';
+import BeachTrips from './screens/BeachTrips';
 /*************************************/
 
 const fetchFonts = () => {
@@ -43,6 +44,7 @@ const fetchFonts = () => {
 const App = () => {
 
   const [isAppLoaded, setAppLoaded] = useState(false);
+  const [displayBeachTrips, setDisplayBeachTrips] = useState(false);
 
   const appLoading = async () => {
     try {
@@ -57,25 +59,38 @@ const App = () => {
       setAppLoaded(true);
       await SplashScreen.hideAsync();
     }
-   
-  }
+  };
 
   useEffect(() => {
     appLoading();
   }, []);
 
+  const beachTripsHandler = () => {
+    setDisplayBeachTrips(true);
+  };
+
+  let content = <Main onDisplayBeaches={beachTripsHandler} />;
+
+  if (displayBeachTrips) {
+    content = <BeachTrips />
+  }
 
   return isAppLoaded ? ( 
-    <Provider store={store}>
-        <Main />
-    </Provider> 
+    <View style={styles.appContainer}>
+      <Provider store={store}>
+        {content}
+      </Provider>
+    </View>
     ) : <LoadingScreen />
     
 
 }
 
 const styles = StyleSheet.create({
-  
+  appContainer: {
+    flex: 1,
+
+  }
 });
 
 export default App;
