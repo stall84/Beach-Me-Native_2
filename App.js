@@ -36,6 +36,7 @@ const fetchFonts = () => {
   return Font.loadAsync({
     'Rubik-Mono': require('./assets/fonts/RubikMonoOne-Regular.ttf'),
     'Karla-Reg': require('./assets/fonts/Karla-Regular.ttf'),
+    'Raleway-SemiBold': require('./assets/fonts/Raleway-SemiBold.ttf'),
     'Raleway-Med': require('./assets/fonts/Raleway-Medium.ttf')
   });
 }

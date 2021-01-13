@@ -3,8 +3,7 @@ import { StyleSheet, Text, View, Button, FlatList } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux';
 import { resetApp } from '../store/actions/appActions';
 
-import BeachTripItem from './BeachTripItem';
-import WeatherItem from './WeatherItem';
+import BeachTripGrid from './BeachTripGrid';
 
 
 
@@ -19,7 +18,7 @@ const BeachTripsComponent = props => {
 
     return (
         <View style={styles.screen}>
-            <BeachTripItem />
+            <BeachTripGrid />
             
             <Button title="Start Over" onPress={() => {
                                         dispatch(resetApp())

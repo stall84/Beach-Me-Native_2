@@ -1,5 +1,6 @@
 import { ADD_CORDS, 
-         RESET_APP} from '../actions/appActions';
+         RESET_APP,
+         SET_DAY} from '../actions/appActions';
 
 const initialState = {
     latitude: 0,
@@ -30,7 +31,12 @@ const appReducer = (state = initialState, action) => {
                 searchBeaches: action.payload.searchBeaches,
                 beaches: action.payload.beaches,
                 forecasts: action.payload.forecasts
-            }    
+            }
+        case SET_DAY:
+            return {
+                ...state,
+                day: action.payload.day
+            }   
             default: 
             return state;
     }

@@ -1,7 +1,7 @@
 export const ADD_CORDS = 'ADD_CORDS';
 export const ADD_SEARCH_BEACHES = 'SEARCH_BEACHES';
 export const RESET_APP = 'RESET_APP';
-
+export const SET_DAY = 'SET_DAY';
 
 
 
@@ -25,14 +25,15 @@ export const addCords = (lat, lng) => {
                 throw new Error('Error posting/retrieving get-beaches endpoint');
             }
             const resData = await response.json();
+            console.log(resData.data)
             const responseTrips = await fetch('http://192.168.1.220:5005/api/v1/get-trips', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    lat: lat,
-                    lng: lng,
+                    reduxLat: lat,
+                    reduxLng: lng,
                     searchBeaches: resData.data
                 })
             })
@@ -40,6 +41,7 @@ export const addCords = (lat, lng) => {
                 throw new Error('Error posting/retrieving get-trips endpoint');
             }
             const resTrips = await responseTrips.json();
+            console.log(resTrips.data)
             const responseForecasts = await fetch('http://192.168.1.220:5005/api/v1/get-weather', {
                 method: 'POST',
                 headers: {
@@ -80,6 +82,16 @@ export const resetApp = () => {
             searchBeaches: null,
             beaches: null,
             forecasts: null
+        }
+    }
+};
+
+export const setDay = (day) => {
+
+    return {
+        type: SET_DAY,
+        payload: {
+            day: day
         }
     }
 };
