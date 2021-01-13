@@ -69,10 +69,14 @@ const App = () => {
     setDisplayBeachTrips(true);
   };
 
+  const resetHandler = () => {
+    setDisplayBeachTrips(false);
+  };
+
   let content = <Main onDisplayBeaches={beachTripsHandler} />;
 
   if (displayBeachTrips) {
-    content = <BeachTrips />
+    content = <BeachTrips resetHandler={resetHandler} />
   }
 
   return isAppLoaded ? ( 

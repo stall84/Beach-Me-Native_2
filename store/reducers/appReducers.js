@@ -1,6 +1,5 @@
-
 import { ADD_CORDS, 
-         ADD_SEARCH_BEACHES } from '../actions/appActions';
+         RESET_APP} from '../actions/appActions';
 
 const initialState = {
     latitude: 0,
@@ -18,12 +17,19 @@ const appReducer = (state = initialState, action) => {
             return {
                 ...state,
                 latitude: action.payload.latitude,
-                longitude: action.payload.longitude
+                longitude: action.payload.longitude,
+                searchBeaches: action.payload.searchBeaches,
+                beaches: action.payload.beaches,
+                forecasts: action.payload.forecasts
             }
-        case ADD_SEARCH_BEACHES:
+        case RESET_APP:
             return {
                 ...state,
-                searchBeaches: action.payload.searchBeaches
+                latitude: action.payload.latitude,
+                longitude: action.payload.longitude,
+                searchBeaches: action.payload.searchBeaches,
+                beaches: action.payload.beaches,
+                forecasts: action.payload.forecasts
             }    
             default: 
             return state;
