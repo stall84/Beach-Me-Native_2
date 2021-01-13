@@ -3,24 +3,9 @@ import { StyleSheet, Text, View, Button, ActivityIndicator, FlatList, Pressable 
 import { useSelector, useDispatch } from 'react-redux';
 import { resetApp } from '../store/actions/appActions';
 
+import BeachTripsComponent from '../components/BeachTripsComponent';
 
-
-const BeachTripsComponent = props => {
-
-    const dispatch = useDispatch();
-    const beachTrips = useSelector(state => state.reducer.beaches);
-
-    return (
-        <View style={styles.screen}>
-            <Text style={styles.title}>BEACH-TRIPS!</Text>
-            <Button title="Start Over" onPress={() => {
-                                        dispatch(resetApp())
-                                        props.resetHandler()} }/>
-        </View>
-    )
-}
-
-const BeachTrips = props => {
+const BeachTripsScreen = props => {
 
     const beachTrips = useSelector(state => state.reducer.beaches);
     const forecasts = useSelector(state => state.reducer.forecasts);
@@ -28,7 +13,10 @@ const BeachTrips = props => {
     let content = <BeachTripsComponent {...props} />
 
     if (!forecasts) {
-        content = <ActivityIndicator size="large" color="#00ff00"/>
+        content = <View style={styles.loadingMsg}>
+                    <ActivityIndicator size="large" color="#00ff00"/>
+                    <Text style={styles.title}>One sec while we grab your escape routes! ...</Text>
+                  </View> 
     }
 
     return (
@@ -47,10 +35,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
       },
+      loadingMsg: {
+        flex: 1,
+        paddingHorizontal: 15,
+        paddingVertical: 8,
+        backgroundColor: '#fff',     
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
       title: {
-        fontFamily: 'Rubik-Mono',
-        fontSize: 35,
+        fontFamily: 'Raleway-Med',
+        fontSize: 26,
+        textAlign: 'center',
       },
 })
 
-export default BeachTrips
+export default BeachTripsScreen;
