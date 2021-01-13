@@ -6,7 +6,7 @@ import { StyleSheet, Text, View, Button } from 'react-native'
 
 /*****  React-Redux and Application Redux Dependencies *****/
 import { useSelector, useDispatch } from 'react-redux';
-import { addCords } from '../store/actions/appActions';
+import { addCords, setDay } from '../store/actions/appActions';
 
 
 
@@ -22,7 +22,14 @@ const MainScreen = props => {
     const lat = useSelector(state => state.reducer.latitude);
     const lng = useSelector(state => state.reducer.longitude);
     
-    
+    // Setting Date to Store for Weather Forecasts
+    const today = new Date();
+    useEffect(() => {
+        let day = today.getDay();
+        dispatch(
+            setDay(day)
+        );
+    }, [today]);
     
     return (
         <View style={styles.screen}>
@@ -31,7 +38,7 @@ const MainScreen = props => {
                 <Button title="Add Cords" 
                         onPress={() => {
                             dispatch(
-                                addCords(33.5555, -88.3253)
+                                addCords(38.5629, -121.4817)
                             )
                             props.onDisplayBeaches()}
                             }/>
