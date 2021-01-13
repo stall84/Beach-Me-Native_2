@@ -6,7 +6,7 @@ import { StyleSheet, Text, View, Button } from 'react-native'
 
 /*****  React-Redux and Application Redux Dependencies *****/
 import { useSelector, useDispatch } from 'react-redux';
-import { addCords, addSearchBeaches } from '../store/actions/appActions';
+import { addCords } from '../store/actions/appActions';
 
 
 
@@ -22,12 +22,7 @@ const Main = props => {
     const lat = useSelector(state => state.reducer.latitude);
     const lng = useSelector(state => state.reducer.longitude);
     
-    // If Users position is available, send the location data to API for nearest beaches (large list)
-    useEffect(() => {
-    if (lat & lng) {
-        dispatch(addSearchBeaches(lat, lng))
-    }
-    }, [lat, lng])
+    
     
     return (
         <View style={styles.screen}>
