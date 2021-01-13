@@ -13,7 +13,7 @@ import { addCords } from '../store/actions/appActions';
 
 
 
-const Main = props => {
+const MainScreen = props => {
 
     /*****  State Hooks  *****/
     const [appReset, setAppReset] = useState(false);
@@ -65,4 +65,4 @@ const styles = StyleSheet.create({
       }
 })
 
-export default Main
+export default MainScreen;

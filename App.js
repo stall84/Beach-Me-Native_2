@@ -28,8 +28,8 @@ const store = createStore(rootReducer,
 
 /*****  APP COMPONENTS  *****/
 import LoadingScreen from './screens/LoadingScreen';
-import Main from './screens/Main';
-import BeachTrips from './screens/BeachTrips';
+import MainScreen from './screens/MainScreen';
+import BeachTripsScreen from './screens/BeachTripsScreen';
 /*************************************/
 
 const fetchFonts = () => {
@@ -73,10 +73,10 @@ const App = () => {
     setDisplayBeachTrips(false);
   };
 
-  let content = <Main onDisplayBeaches={beachTripsHandler} />;
+  let content = <MainScreen onDisplayBeaches={beachTripsHandler} />;
 
   if (displayBeachTrips) {
-    content = <BeachTrips resetHandler={resetHandler} />
+    content = <BeachTripsScreen resetHandler={resetHandler} />
   }
 
   return isAppLoaded ? ( 
