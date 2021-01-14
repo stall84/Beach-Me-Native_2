@@ -16,13 +16,15 @@ const BeachTripsComponent = props => {
     
 
     return (
-        <View style={styles.screen}>
-            <BeachTripGrid />
-            
+        <View>
+            <View style={styles.screen}>
+                <BeachTripGrid />       
+            </View>
+            <View style={styles.buttonContainer}>
             <Button title="Start Over" onPress={() => {
                                         dispatch(resetApp())
                                         props.resetHandler()} }/>
-        
+            </View>
         </View>
     );
 };
@@ -34,16 +36,19 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
-        height: Dimensions.get('window').height / 1.1,
+        borderWidth: 1,
+        width: Dimensions.get('window').width,
+        flex: 1,
+      },
+      buttonContainer: {
+          borderWidth: 1,
+          height: 50,
+          paddingBottom: 5,
       },
       title: {
         fontFamily: 'Rubik-Mono',
         fontSize: 35,
       },
-      listView: {
-          flex: 1,
-          marginTop: 30,
-      }
 });
 
 export default BeachTripsComponent;

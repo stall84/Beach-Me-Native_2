@@ -57,8 +57,8 @@ const styles = StyleSheet.create({
         backgroundColor: THEMES.sand1,        
     },
     flatlist: {
-        backgroundColor: THEMES.mauve3,
-        paddingVertical: 50,
+        flex: 1,
+        backgroundColor: THEMES.mauve2,
         width: Dimensions.get('window').width,
     },
     topContainer: {
