@@ -25,7 +25,6 @@ export const addCords = (lat, lng) => {
                 throw new Error('Error posting/retrieving get-beaches endpoint');
             }
             const resData = await response.json();
-            console.log(resData.data)
             const responseTrips = await fetch('http://192.168.1.220:5005/api/v1/get-trips', {
                 method: 'POST',
                 headers: {
@@ -41,7 +40,6 @@ export const addCords = (lat, lng) => {
                 throw new Error('Error posting/retrieving get-trips endpoint');
             }
             const resTrips = await responseTrips.json();
-            console.log(resTrips.data)
             const responseForecasts = await fetch('http://192.168.1.220:5005/api/v1/get-weather', {
                 method: 'POST',
                 headers: {

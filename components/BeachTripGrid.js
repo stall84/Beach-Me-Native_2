@@ -6,31 +6,7 @@ import { THEMES } from '../assets/styles/themes';
 import { timeConverter, kelvinConverter, forecastDays } from '../utilities/utilities';
 
 
-const ForecastsBlock = (props) => {
-    const forecasts = useSelector(state => state.reducer.forecasts);
-    const beachForecast = forecasts[props.useKey];
-    const currDay = useSelector(state => state.reducer.day);
-    
-        return (
-            <View style={styles.forecastGrid}>
-                <View style={styles.forecastGridItem} >
-                    <Text>{forecastDays(currDay)[0]}</Text>
-                    <Text>{beachForecast.list[8].weather[0].description}</Text>
-                    <Image resizeMethod="scale" style={styles.iconImg} source={{uri: `https://openweathermap.org/img/wn/${beachForecast.list[8].weather[0].icon}.png`}} />
-                </View>
-                <View style={styles.forecastGridItem} >
-                    <Text>{forecastDays(currDay)[1]}</Text>
-                    <Text>{beachForecast.list[16].weather[0].description}</Text>
-                    <Image resizeMethod="scale" style={styles.iconImg} source={{uri: `https://openweathermap.org/img/wn/${beachForecast.list[16].weather[0].icon}.png`}} />
-                </View>
-                <View style={styles.forecastGridItem} >
-                    <Text>{forecastDays(currDay)[2]}</Text>
-                    <Text>{beachForecast.list[24].weather[0].description}</Text>
-                    <Image resizeMethod="scale" style={styles.iconImg} source={{uri: `https://openweathermap.org/img/wn/${beachForecast.list[24].weather[0].icon}.png`}} />
-                </View>
-            </View>
-        )
-}
+import ForecastBlock from './ForecastBlock';
 
 
 const BeachTripGrid = props => {
@@ -41,14 +17,16 @@ const BeachTripGrid = props => {
     const renderGridItem = (itemData) => {
 
         return (
-            <View style={styles.gridItem}>
+            <View style={styles.gridItemContainer} >
                 <Pressable onPress={() => { Linking.openURL(`https://www.google.com/maps/dir/?api=1&origin=${latitude},${longitude}&destination=${itemData.item.name}&travelmode=driving`)}}>
                     <View style={styles.topContainer}>
                         <Text style={styles.beachName}>{itemData.item.name}</Text>
                         <Text style={styles.duration}>{timeConverter(itemData.item.dur)}</Text>
                     </View>
                 </Pressable>
-                <ForecastsBlock useKey={itemData.index}/>
+                <View style={styles.bottomContainer}>
+                    <ForecastBlock useKey={itemData.index}/>
+                </View>
             </View>
             );
     };
@@ -66,44 +44,44 @@ const BeachTripGrid = props => {
 
 
 const styles = StyleSheet.create({
-    gridItem: {
+    gridItemContainer: {
         alignItems: 'center',
-        borderWidth: 2,
         flex: 1,
-        margin: 15,
-        height: 250,
-        backgroundColor: THEMES.sand1
+        margin: 17,
+        height: 300,
+        shadowColor: THEMES.blue1,
+        shadowOpacity: 0.27,
+        shadowOffset: { width: 2, height: 2 },
+        shadowRadius: 10,
+        elevation: 4,
+        backgroundColor: THEMES.sand1,        
     },
     flatlist: {
-        backgroundColor: THEMES.mauve3,
-        paddingTop: 50,
+        flex: 1,
+        backgroundColor: THEMES.mauve2,
         width: Dimensions.get('window').width,
     },
-    forecastGrid: {
-        flex: 1,
-        flexDirection: 'row',
-        marginHorizontal: 5,
-        justifyContent: 'space-evenly',
-        alignItems: 'flex-start'
-    },
-    forecastGridItem: {
-        flex: 1,
-        alignItems: 'center'
-    },
-    iconImg: {
-        width: 68,
-        height: 68,
-    },
     topContainer: {
-        alignItems: 'center'
+        marginTop: 20,
+        alignItems: 'center',
     },
     beachName: {
-        fontSize: 24,
-        fontFamily: 'Karla-Reg'
+        fontSize: 28,
+        fontFamily: 'Karla-Reg',
+        color: THEMES.blue2
     },
     duration: {
-        fontSize: 20,
-        fontFamily: 'Raleway-SemiBold'
+        fontSize: 22,
+        fontFamily: 'Raleway-SemiBold',
+        color: THEMES.blue2
+    },
+    bottomContainer: {
+        marginTop: 30,
+        flexDirection: 'row',
+        shadowColor: THEMES.sadle,
+        shadowOffset: { width: 1, height: 1},
+        shadowRadius: 10,
+        shadowOpacity: 0.5,
     }
 })
 

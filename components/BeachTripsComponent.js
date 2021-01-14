@@ -1,10 +1,9 @@
 import React from 'react'
-import { StyleSheet, Text, View, Button, FlatList } from 'react-native'
+import { StyleSheet, Text, View, Button, FlatList, Dimensions } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux';
 import { resetApp } from '../store/actions/appActions';
 
 import BeachTripGrid from './BeachTripGrid';
-
 
 
 const BeachTripsComponent = props => {
@@ -17,13 +16,15 @@ const BeachTripsComponent = props => {
     
 
     return (
-        <View style={styles.screen}>
-            <BeachTripGrid />
-            
+        <View>
+            <View style={styles.screen}>
+                <BeachTripGrid />       
+            </View>
+            <View style={styles.buttonContainer}>
             <Button title="Start Over" onPress={() => {
                                         dispatch(resetApp())
                                         props.resetHandler()} }/>
-        
+            </View>
         </View>
     );
 };
@@ -32,19 +33,22 @@ const BeachTripsComponent = props => {
 
 const styles = StyleSheet.create({
     screen: {
-        flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        borderWidth: 1,
+        width: Dimensions.get('window').width,
+        flex: 1,
+      },
+      buttonContainer: {
+          borderWidth: 1,
+          height: 50,
+          paddingBottom: 5,
       },
       title: {
         fontFamily: 'Rubik-Mono',
         fontSize: 35,
       },
-      listView: {
-          flex: 1,
-          marginTop: 30,
-      }
 });
 
 export default BeachTripsComponent;

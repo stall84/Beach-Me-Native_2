@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Button, ActivityIndicator, FlatList, Pressable } from 'react-native'
+import { StyleSheet, Text, View, Button, ActivityIndicator, FlatList, Pressable, Dimensions } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux';
 import { resetApp } from '../store/actions/appActions';
 

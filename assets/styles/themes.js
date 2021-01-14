@@ -21,4 +21,5 @@ export const THEMES = {
     sadle: 'rgb(84, 53, 40)',
     red1: 'rgba(151, 45, 13, 0.925)',
     thistle: 'rgb(203, 200, 172)',
+    grey: 'rgb(204,204,204)',
 };

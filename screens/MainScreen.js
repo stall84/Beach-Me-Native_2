@@ -38,7 +38,7 @@ const MainScreen = props => {
                 <Button title="Add Cords" 
                         onPress={() => {
                             dispatch(
-                                addCords(38.5629, -121.4817)
+                                addCords(38.5629, -81.4817)
                             )
                             props.onDisplayBeaches()}
                             }/>
