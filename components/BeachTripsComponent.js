@@ -1,10 +1,9 @@
 import React from 'react'
-import { StyleSheet, Text, View, Button, FlatList } from 'react-native'
+import { StyleSheet, Text, View, Button, FlatList, Dimensions } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux';
 import { resetApp } from '../store/actions/appActions';
 
 import BeachTripGrid from './BeachTripGrid';
-
 
 
 const BeachTripsComponent = props => {
@@ -32,10 +31,10 @@ const BeachTripsComponent = props => {
 
 const styles = StyleSheet.create({
     screen: {
-        flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        height: Dimensions.get('window').height / 1.1,
       },
       title: {
         fontFamily: 'Rubik-Mono',

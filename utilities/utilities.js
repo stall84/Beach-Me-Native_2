@@ -11,6 +11,10 @@ export const kelvinConverter = (T) => {
     return ((T * (9/5)) - 459.67).toFixed()
 }
 
+export const celsiusConverter = (T) => {
+    return ((T * (9/5)) + 32).toFixed()
+}
+
 export const forecastDays = (currDay) => {
     
     let dayArr = [];
