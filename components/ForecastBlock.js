@@ -69,10 +69,10 @@ const styles = StyleSheet.create({
     },
     day: {
         fontSize: 21,
-        fontFamily: 'Karla-Med'
+        fontFamily: 'Karla-XBold'
     },
     descripContainer: {
-        height: 40,
+        height: 46,
     },
     description: {
         fontSize: 17,
