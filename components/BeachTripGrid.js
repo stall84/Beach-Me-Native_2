@@ -37,6 +37,7 @@ const BeachTripGrid = props => {
         style={styles.flatlist}
         data={beachTrips}
         renderItem={renderGridItem}
+        keyExtractor={item => (item.dur).toString()}
         />
     )
 }

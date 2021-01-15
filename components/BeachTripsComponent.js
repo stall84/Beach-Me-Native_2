@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
       },
       buttonContainer: {
           borderWidth: 1,
-          height: 38,
+          height: 50,
       },
       title: {
         fontFamily: 'Rubik-Mono',

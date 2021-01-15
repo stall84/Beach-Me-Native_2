@@ -5,7 +5,8 @@ import * as Location from 'expo-location';
 import { THEMES } from '../assets/styles/themes';
 
 /*****  Custom Components  *****/
-
+import Card from '../components/Card';
+import MainButton from '../components/MainButton';
 /*****  React-Redux and Application Redux Dependencies *****/
 import { useSelector, useDispatch } from 'react-redux';
 import { addCords, setDay } from '../store/actions/appActions';
@@ -20,20 +21,18 @@ const MainScreen = props => {
     /*****  State Hooks  *****/
     const [location, setLocation] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
-    const [validatedInput, setValidatedInput] = useState(null);
-    const [enteredText, setEnteredText] = useState('');
+    const [validatedInput, setValidatedInput] = useState('');
+    const [enteredText, setEnteredText] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
     const [validateMsg, setValidateMsg] = useState(null);
-    const [geoLocation, setGeoLocation] = useState(null);
     /*****  Redux Hooks  *****/
     const dispatch = useDispatch();
-    const lat = useSelector(state => state.reducer.latitude);
-    const lng = useSelector(state => state.reducer.longitude);
+    // const lat = useSelector(state => state.reducer.latitude);
+    // const lng = useSelector(state => state.reducer.longitude);
     
     // Setting Date to Store for Weather Forecasts
     const today = new Date();
     useEffect(() => {
-        console.log('date useEffect ran');
         let day = today.getDay();
         dispatch(
             setDay(day)
@@ -53,7 +52,6 @@ const MainScreen = props => {
     };
 
     const onPressHandler = () => {
-        console.log('PressHandler fired')
         if (location) {
             dispatch(addCords(userLat, userLng));
             props.onDisplayBeaches(true);
@@ -63,27 +61,13 @@ const MainScreen = props => {
         }
     };
 
-
-    useEffect(() => {
-        console.log('geoLocation useEffect ran');
-        ( async () => {
-            console.log('geocodeLocation useCallback ran');
-            let geoLoc = await Location.geocodeAsync(validatedInput);
-            console.log(geoLoc);
-            setGeoLocation(geoLoc);
-            dispatch(addCords(geoLoc[0].latitude, geoLoc[0].longitude));
-            props.onDisplayBeaches(true);
-        }
-    )();
-    }, [validatedInput]);
-
     useEffect(() => {
         (async () => {
             let { status } = await Location.requestPermissionsAsync();
             if (status !== 'granted') {
                 setErrorMsg('Permission to access location was denied');
+                return;
             }
-            console.log('getCurrPosition useEffect ran');
             let location = await Location.getCurrentPositionAsync({});
             setLocation(location);
         })();
@@ -99,6 +83,21 @@ const MainScreen = props => {
         userLng = location.coords.longitude;
     } 
 
+    useEffect(() => {
+    
+        ( async () => {
+            console.log('inner block of geocode ran')
+            let geoLoc = await Location.geocodeAsync(validatedInput);
+            console.log(geoLoc)
+            if (!geoLoc[0].latitude) {
+                return;
+            }
+            console.log('outterBlock of geocode ran')
+            dispatch(addCords(geoLoc[0].latitude, geoLoc[0].longitude));
+            props.onDisplayBeaches(true);
+        })();
+    }, [validatedInput]);
+
     return (
         <View style={styles.screen}>
             <Modal
@@ -109,33 +108,42 @@ const MainScreen = props => {
                 }}
              >
             <View style={styles.modalScreen}>
-                <Text style={styles.displayText}> Off-the-Grid?? .. No prob, We've got you covered! 
+                <Card style={styles.modalCard}>
+                <Text style={styles.displayText}> Off-the-Grid? No prob, We've got you covered! 
                         Just enter any U.S. City, State combo OR Zipcode to get Beached</Text>
                 <View style={styles.inputContainer}>
                     <TextInput style={styles.input}
                             blurOnSubmit
+                            placeholder="e.g. Atlanta, GA"
                             autoCorrect={false}
                             onChangeText={setEnteredText}
                             value={enteredText}  />
                 </View>
+                </Card>
+                
                 <Text style={styles.modalMsg}>{validateMsg}</Text>
-            </View>
-            <View style={styles.modalBtnContainer}>
-                <Button style={styles.modalBtn} title="Let's Go!" 
-                    onPress={modalInputHandler}
-                    />
+                <MainButton onPress={modalInputHandler}>
+                    Let's Go!
+                </MainButton>
             </View>
             </Modal>
 
+
             <Text style={styles.title}>BEACH-ME!</Text>
+            <Card style={styles.mainCard}>
+                <Text style={styles.mainText}>
+                    Once your location is attained from your phone's location services, or from the geocode-input form (if you disallowed location services).
+                    A list of the 5 closest beaches by driving time and their associated 3-day weather forecast will be rendered for you.
+                    Simply click on the beach-name of your choice to be taken to detailed directions!
+                </Text>
+            </Card>
             <View>
-                <Button title="Go To Escape Plans" 
-                        onPress={() => {
-                            onPressHandler()}
-                            }/>
-                <Text style={styles.display}>
+                <Text style={styles.btnDesc}>
                     Ready to get away?
                 </Text>
+                <MainButton onPress={onPressHandler}>
+                    Go To Escape Plans
+                </MainButton>
             </View>
         </View>
     );
@@ -145,28 +153,47 @@ const MainScreen = props => {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: THEMES.sand2a,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-evenly',
       },
       title: {
+        color: THEMES.blue2,
         fontFamily: 'Rubik-Mono',
-        fontSize: 35,
-        marginBottom: 20,
+        fontSize: 45,
+        textShadowColor: THEMES.mauve2,
+        textShadowOffset: {width: 3, height: 3},
+        textShadowRadius: 6,
       },
-      display: {
+      btnDesc: {
+          textAlign: 'center',
           fontFamily: 'Karla-Reg',
-          fontSize: 20
+          fontSize: 20,
+          marginBottom: 10,
       },
       modalScreen: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: THEMES.sand1
+    },
+    mainCard: {
+        backgroundColor: THEMES.sand1, 
+    },
+    mainText: {
+        fontSize: 18,
+        fontFamily: 'Raleway-Med',
+        textAlign: 'center'
+    },
+    modalCard: {
+        backgroundColor: THEMES.sand2,
+        justifyContent: 'space-evenly',
+        height: 350,
     },
     displayText: {
         fontFamily: 'Raleway-SemiBold',
         fontSize: 24,
-        color: THEMES.thistle,
+        color: THEMES.smaltBlue,
         textAlign: 'center',
         padding: 15,
     },
@@ -183,13 +210,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     input: {
-        backgroundColor: 'grey',
+        backgroundColor: THEMES.lightGrey,
+        borderWidth: 0.7,
+        fontFamily: 'Raleway-Med',
+        fontSize: 18,
+        color: THEMES.red1,
         width: 300,
-        height: 80,
+        height: 44,
         textAlign: 'center'
     },
     modalBtnContainer: {
-        height: 70,
+        height: 74,
     },
     modalBtn: {
         fontFamily: 'Raleway-BoldItalic',

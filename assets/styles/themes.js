@@ -22,4 +22,6 @@ export const THEMES = {
     red1: 'rgba(151, 45, 13, 0.925)',
     thistle: 'rgb(203, 200, 172)',
     grey: 'rgb(204,204,204)',
+    lightGrey: 'rgb(233,233,223)',
+    logoBlue: 'rgb(70,159,177)',
 };

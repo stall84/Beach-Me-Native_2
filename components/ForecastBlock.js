@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Pressable, FlatList, Linking, Dimensions, Image
 import { useSelector } from 'react-redux';
 import { THEMES } from '../assets/styles/themes';
 
-import { celsiusConverter, forecastDays } from '../utilities/utilities';
+import { forecastDays } from '../utilities/utilities';
 
 const ForecastBlock = (props) => {
     const forecasts = useSelector(state => state.reducer.forecasts);
