@@ -1,12 +1,12 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, Dimensions } from 'react-native'
+import { StyleSheet, View, Image, Dimensions } from 'react-native'
 
 
 
 const Header = () => {
     return (
         <View style={styles.container}>
-            <Image source={require('../assets/images/beach-me-app-header.jpeg')} />
+            <Image source={require('../assets/images/beach-me-app-header-1.png')} />
         </View>
     );
 };
@@ -16,7 +16,7 @@ const Header = () => {
 const styles = StyleSheet.create({
 
     container: {
-        height: 150,
+        height: 160,
         width: Dimensions.get('window').width,
     }
 });

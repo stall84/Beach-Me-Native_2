@@ -38,7 +38,10 @@ const fetchFonts = () => {
     'Rubik-Mono': require('./assets/fonts/RubikMonoOne-Regular.ttf'),
     'Karla-Reg': require('./assets/fonts/Karla-Regular.ttf'),
     'Karla-Med': require('./assets/fonts/Karla-Medium.ttf'),
+    'Karla-Bold': require('./assets/fonts/Karla-Bold.ttf'),
+    'Karla-XBold': require('./assets/fonts/Karla-ExtraBoldItalic.ttf'),
     'Raleway-SemiBold': require('./assets/fonts/Raleway-SemiBold.ttf'),
+    'Raleway-BoldItalic': require('./assets/fonts/Raleway-BoldItalic.ttf'),
     'Raleway-Med': require('./assets/fonts/Raleway-Medium.ttf')
   });
 }
@@ -68,8 +71,8 @@ const App = () => {
     appLoading();
   }, []);
 
-  const beachTripsHandler = () => {
-    setDisplayBeachTrips(true);
+  const beachTripsHandler = (bool) => {
+    setDisplayBeachTrips(bool);
   };
 
   const resetHandler = () => {
@@ -101,6 +104,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width,
 
   }
+  
 });
 
 export default App;
