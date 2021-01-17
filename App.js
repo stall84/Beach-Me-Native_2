@@ -38,10 +38,9 @@ const fetchFonts = () => {
     'Rubik-Mono': require('./assets/fonts/RubikMonoOne-Regular.ttf'),
     'Karla-Reg': require('./assets/fonts/Karla-Regular.ttf'),
     'Karla-Med': require('./assets/fonts/Karla-Medium.ttf'),
-    'Karla-Bold': require('./assets/fonts/Karla-Bold.ttf'),
+    'Karla-XLite': require('./assets/fonts/Karla-ExtraLight.ttf'),
     'Karla-XBold': require('./assets/fonts/Karla-ExtraBoldItalic.ttf'),
     'Raleway-SemiBold': require('./assets/fonts/Raleway-SemiBold.ttf'),
-    'Raleway-BoldItalic': require('./assets/fonts/Raleway-BoldItalic.ttf'),
     'Raleway-Med': require('./assets/fonts/Raleway-Medium.ttf')
   });
 }

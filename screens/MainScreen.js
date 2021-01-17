@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useCallback } from 'react'
-import { StyleSheet, Text, View, Button, TextInput, Modal, Dimensions } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { StyleSheet, Text, View, TextInput, Modal, Dimensions } from 'react-native'
 import * as Location from 'expo-location';
 
 import { THEMES } from '../assets/styles/themes';
@@ -8,7 +8,7 @@ import { THEMES } from '../assets/styles/themes';
 import Card from '../components/Card';
 import MainButton from '../components/MainButton';
 /*****  React-Redux and Application Redux Dependencies *****/
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addCords, setDay } from '../store/actions/appActions';
 
 
@@ -27,8 +27,7 @@ const MainScreen = props => {
     const [validateMsg, setValidateMsg] = useState(null);
     /*****  Redux Hooks  *****/
     const dispatch = useDispatch();
-    // const lat = useSelector(state => state.reducer.latitude);
-    // const lng = useSelector(state => state.reducer.longitude);
+
     
     // Setting Date to Store for Weather Forecasts
     const today = new Date();
@@ -86,13 +85,10 @@ const MainScreen = props => {
     useEffect(() => {
     
         ( async () => {
-            console.log('inner block of geocode ran')
             let geoLoc = await Location.geocodeAsync(validatedInput);
-            console.log(geoLoc)
             if (!geoLoc[0].latitude) {
                 return;
             }
-            console.log('outterBlock of geocode ran')
             dispatch(addCords(geoLoc[0].latitude, geoLoc[0].longitude));
             props.onDisplayBeaches(true);
         })();
@@ -129,7 +125,7 @@ const MainScreen = props => {
             </Modal>
 
 
-            <Text style={styles.title}>BEACH-ME!</Text>
+            {/* <Text style={styles.title}>BEACH-ME!</Text> */}
             <Card style={styles.mainCard}>
                 <Text style={styles.mainText}>
                     Once your location is attained from your phone's location services, or from the geocode-input form (if you disallowed location services).
@@ -179,10 +175,11 @@ const styles = StyleSheet.create({
     },
     mainCard: {
         backgroundColor: THEMES.sand1, 
+        marginHorizontal: 5,
     },
     mainText: {
         fontSize: 18,
-        fontFamily: 'Raleway-Med',
+        fontFamily: 'Karla-XLite',
         textAlign: 'center'
     },
     modalCard: {
@@ -199,7 +196,7 @@ const styles = StyleSheet.create({
     },
     modalMsg: {
         padding: 15,
-        fontFamily: 'Raleway-BoldItalic',
+        fontFamily: 'Raleway-SemiBold',
         textAlign: 'center',
         fontSize: 20,
         color: THEMES.red1,

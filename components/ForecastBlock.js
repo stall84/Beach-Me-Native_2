@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Pressable, FlatList, Linking, Dimensions, Image } from 'react-native'
+import { StyleSheet, Text, View, Image } from 'react-native'
 
 import { useSelector } from 'react-redux';
 import { THEMES } from '../assets/styles/themes';
