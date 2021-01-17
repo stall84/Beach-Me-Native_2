@@ -1,14 +1,22 @@
 import React from 'react'
-import { StyleSheet, View, Image, Dimensions } from 'react-native'
+import { StyleSheet, View, Image, Dimensions, Platform } from 'react-native'
 
 
 
 const Header = () => {
-    return (
-        <View style={styles.container}>
-            <Image source={require('../assets/images/beach-me-app-header-1.png')} />
-        </View>
-    );
+    if (Platform.OS === 'ios') {
+        return (
+            <View style={styles.container}>
+                <Image source={require('../assets/images/beach-me-header-ios.png')} />
+            </View>
+        );
+    } else if (Platform.OS === 'android') {
+        return (
+            <View style={styles.container}>
+                <Image source={require('../assets/images/beach-me-android-header.png')} />
+            </View>
+        );
+    }
 };
 
 

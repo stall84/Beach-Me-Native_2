@@ -1,6 +1,6 @@
 import React from 'react'
-import { StyleSheet, Text, View, Button, FlatList, Dimensions } from 'react-native'
-import { useSelector, useDispatch } from 'react-redux';
+import { StyleSheet, View, Button, Dimensions } from 'react-native'
+import { useDispatch } from 'react-redux';
 import { resetApp } from '../store/actions/appActions';
 
 import BeachTripGrid from './BeachTripGrid';
@@ -11,7 +11,6 @@ const BeachTripsComponent = props => {
 
 
     const dispatch = useDispatch();
-    const beachTrips = useSelector(state => state.reducer.beaches);
 
     
 
