@@ -11,7 +11,7 @@ export const SET_DAY = 'SET_DAY';
 export const addCords = (lat, lng) => {
     return async dispatch => {
         try {
-            const response = await fetch('http://192.168.1.220:5005/api/v1/beaches', {
+            const response = await fetch('https://mes-personal-site.herokuapp.com/api/v1/beaches', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -25,7 +25,7 @@ export const addCords = (lat, lng) => {
                 throw new Error('Error posting/retrieving get-beaches endpoint');
             }
             const resData = await response.json();
-            const responseTrips = await fetch('http://192.168.1.220:5005/api/v1/get-trips', {
+            const responseTrips = await fetch('https://mes-personal-site.herokuapp.com/api/v1/get-trips', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -40,7 +40,7 @@ export const addCords = (lat, lng) => {
                 throw new Error('Error posting/retrieving get-trips endpoint');
             }
             const resTrips = await responseTrips.json();
-            const responseForecasts = await fetch('http://192.168.1.220:5005/api/v1/get-weather', {
+            const responseForecasts = await fetch('https://mes-personal-site.herokuapp.com/api/v1/get-weather', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -64,7 +64,7 @@ export const addCords = (lat, lng) => {
                     }
                 });  
         } catch (error) {
-            console.log('Error Retrieving Beach, Trip and/or Weather Data from Beach_Me API: ' + error)
+            console.error('Error Retrieving Beach, Trip and/or Weather Data from Beach_Me API: ' + error)
             throw error;
         }        
                      
